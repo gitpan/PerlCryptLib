@@ -1,0 +1,26 @@
+Revision history for Perl extension PerlCryptLib
+================================================
+
+1.03  Fri May 26 07:50:39 2006
+	- Succesfully tested with shared cryptlib library
+	- Added *.inc deletion on 'make realclean'
+	- Added test verbosity,
+
+1.02  Wed May 24 15:28:13 2006
+	- Added support for previously missed functions:
+		* cryptLogin
+		* cryptLogout
+		* cryptCADeleteItem
+		* cryptImportKeyEx
+	- Use of enum-1.016 package to speed-up PerlCryptLib.ph
+	- Added new sub __symbolList to retrieve constants and 
+	  enumerated constants to esport
+
+1.01  Thu May 18 17:02:17 2006
+	- Added support for low-level components macros
+	- Added new test script 2.t for info queries
+	- Corrected cryptExportKey stub
+	- Added object-type constants 
+
+1.00  Fri Apr 21 09:33:23 2006
+	- First stable release

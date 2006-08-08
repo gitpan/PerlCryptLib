@@ -1,0 +1,67 @@
+============================
+PerlCryptLib v.1.00 - README
+============================
+
+
+What is cryptlib?
+-----------------
+
+PerlCryptLib is an interface module to access cryptlib API.
+
+cryptlib (Copyright 1992-2005 Peter Gutmann. All rights reserved.) is a 
+powerful encryption and security software toolkit that allows even 
+inexperienced crypto-programmers to easily add world-leading encryption and 
+authentication services to their software.
+
+For more information about cryptlib features and state-of-the-art, please 
+visit its official web-site at:
+
+     http://www.cs.auckland.ac.nz/~pgut001/cryptlib
+
+
+What is PerlCryptLib?
+---------------------
+
+PerlCryptLib is a wrapping extension that allow Perl users to use
+the Open-Source/multi-platform crypto library cryptlib directly from Perl.
+The goal of the module is to give programmers the easyest way to get
+cryptlib functionality; this is done maintaining the exact syntax explained
+in the cryptlib manual.
+
+
+Pre-installation notes
+----------------------
+
+* Versions and platforms supported:
+
+	- cryptlib v.3.2.2 (both shared and static build) on linux
+
+* In order to "make" PerlCryptLib correctly you need to modify the 
+  pre-processed line in PerlCryptLib.xs:
+
+	#include "../cryptlib322/cryptlib.h"
+
+  to point to your cryptlib source-directory
+
+
+Installation
+------------
+
+Simply do:
+
+	$ tar -xvzf PerlCryptLib-x.xx.tar.gz
+	$ cd PerlCryptLib-x.xx
+	$ perl Makefile.PL
+	$ make
+	$ make test
+	$ su ~
+	$ make install
+
+Note: to get test-verbosity try 'make test TEST_VERBOSE=1' instead 'make test'.
+
+Post-installation
+-----------------
+
+See MAN documentation for detailed information about PerlCryptLib:
+
+	$ man PerlCryptlib
