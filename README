@@ -34,14 +34,7 @@ Pre-installation notes
 
 * Versions and platforms supported:
 
-	- cryptlib v.3.2.2 (both shared and static build) on linux
-
-* In order to "make" PerlCryptLib correctly you need to modify the 
-  pre-processed line in PerlCryptLib.xs:
-
-	#include "../cryptlib322/cryptlib.h"
-
-  to point to your cryptlib source-directory
+	- cryptlib v.3.2.2 (or later) on linux
 
 
 Installation
@@ -51,6 +44,7 @@ Simply do:
 
 	$ tar -xvzf PerlCryptLib-x.xx.tar.gz
 	$ cd PerlCryptLib-x.xx
+	$ ./configure
 	$ perl Makefile.PL
 	$ make
 	$ make test

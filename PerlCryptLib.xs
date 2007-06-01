@@ -1,3 +1,12 @@
+/*******************************************************************************
+
+ Perl extesione interface (XS) to 'cryptlib' library (PerlCryptLib)
+
+ Copyright (C) 2006-2007 Alvaro Livraghi. All Rights Reserved.
+ Alvaro Livraghi, <perlcryptlib@gmail.com>
+
+*******************************************************************************/
+
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
@@ -5,7 +14,7 @@
 
 #include "ppport.h"
 
-#include "../cryptlib322/cryptlib.h"
+#include CRYPTLIB_H
 
 #include "const-c.inc"
 
@@ -13,17 +22,16 @@ MODULE = PerlCryptLib		PACKAGE = PerlCryptLib
 
 INCLUDE: const-xs.inc
 
-
 ################################################################################
 #                                                                              #
-# Funzioni di utilità generale                                                 #
+# Funzioni di utilita' generale                                                #
 #                                                                              #
 ################################################################################
 
 #
 # Simula (per Perl) la seguente operazione su un generico buffer:
 #
-#      void * buffer = "Questo è un buffer";
+#      void * buffer = "Questo e' un buffer";
 #      buffer += offset;
 #
 void * shift_buffer(buffer, length, offset)

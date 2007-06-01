@@ -1,6 +1,14 @@
 Revision history for Perl extension PerlCryptLib
 ================================================
 
+1.04  Thu Apr 19 19:18:55 2007
+	- Granted compatibility with different version of cryptlib
+	- Introduced 'configure' shell script
+	- Auto-creation of PerlCryptLib.ph header file using
+	  GenPerl.pl script adapted from GenBas.pl cryptlib script
+	- Removed dependences from Constant.pm and Enum.pm
+	- Corrected ppport.h header file to remove warnings
+
 1.03  Fri May 26 07:50:39 2006
 	- Succesfully tested with shared cryptlib library
 	- Added *.inc deletion on 'make realclean'

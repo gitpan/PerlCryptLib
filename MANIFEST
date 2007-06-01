@@ -1,7 +1,8 @@
+configure
 Changes
 MANIFEST
 Makefile.PL
-PerlCryptLib.ph
+GenPerl.pl
 PerlCryptLib.pm
 PerlCryptLib.xs
 README

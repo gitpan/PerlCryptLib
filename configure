@@ -1,0 +1,69 @@
+#!/bin/bash
+
+###############################################################################
+#                                                                             #
+# PerlCryptLib's configuration script                                         #
+#                                                                             #
+# Copyright (C) 2006-2007 Alvaro Livraghi. All Rights Reserved.               #
+#                                                                             #
+###############################################################################
+
+#
+# This script:
+#
+#   - 1) uses 'locate' to detect (if possible) cryptlib source directory;
+#   - 2) submit that directory to the user;
+#   - 3) read user input for effective cryptlib source directory;
+#   - 4) run 'GenPerl.pl' perl script to coovert 'cryptlib.h' in 'PerlCryptLib.ph'
+#   - 5) save cryptlib source directory path in hidden file '.cl_h' that will be used by Makefile.PL
+#
+
+#
+# Error handler
+#
+function _error {
+	echo "ERROR! $1"
+	exit 1
+}
+
+##### Remove './cl_h' to  init
+CL_H="./.cl_h"
+rm -f $CL_H 2>/dev/null
+
+#
+# 1)
+#
+cl_h=$( locate cryptlib.h 2>/dev/null | head -n 1 )
+if [ "$?" == 0 ]; then
+	cl_header=$( basename $cl_h )
+	cl_path=$( echo $cl_h | sed -e "s/$cl_header$//" )
+fi
+cl_path_in="$cl_path"
+
+#
+# 2) & 3)
+#
+read -p "Input cryptlib's source directory (default to: [${cl_path}]) : " cl_path_in 
+if [ "$cl_path_in" != "" ]; then
+	cl_path="$cl_path_in"
+	cl_path=$( echo $cl_path | sed -e "s/\/*$//" )
+	if [[ ! -d $cl_path ]]; then _error "'$cl_path' not found! ($!)"; fi
+	cl_h="$cl_path/cryptlib.h"
+fi
+if [[ ! -r $cl_h ]]; then _error "'$cl_h' not readable! ($!)"; fi
+
+#
+# 4)
+#
+echo -n "Writing 'PerlCryptLib.ph'... "
+perl ./GenPerl.pl $cl_h ./PerlCryptLib.ph 1>/dev/null
+if [ "$?" != "0" ]; then _error "failed!"; fi
+
+#
+# 5)
+#
+echo -n "$cl_h" >$CL_H
+echo "done."
+
+exit 0;
+
