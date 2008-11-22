@@ -1,6 +1,11 @@
 Revision history for Perl extension PerlCryptLib
 ================================================
 
+1.05  Sat Oct 18 18:26:14 2008
+	- Optimized compatibility with different version of cryptlib
+	- Removed 'configure' shell script to simplify CPAN installation
+	- Support for 'cryptlib.h' new types
+
 1.04  Thu Apr 19 19:18:55 2007
 	- Granted compatibility with different version of cryptlib
 	- Introduced 'configure' shell script

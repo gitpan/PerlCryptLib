@@ -2,10 +2,51 @@ use 5.008;
 use ExtUtils::MakeMaker;
 use Data::Dumper;
 
-my $PERL_CRYPT_LIB_HEADER = undef;
-while ( !($PERL_CRYPT_LIB_HEADER = `cat ./.cl_h 2>/dev/null`) ) {
-	die "Installation aborted!\n\n" if system("./configure");
-};
+
+my $CRYPT_LIB_HEADER = 'cryptlib.h';
+my $PERL_CRYPT_LIB_HEADER = $ENV{PERL_CRYPT_LIB_HEADER};
+
+unless ( defined $PERL_CRYPT_LIB_HEADER ) {
+	print "Looking for '$CRYPT_LIB_HEADER', please wait... ";
+	my @found = qx{find /home -type f -iname '$CRYPT_LIB_HEADER' 2>/dev/null};
+	if ( scalar(@found) == 0 ) {
+		print "NOT FOUND", "\n";
+		print "$0 ABORTED!", "\n";
+		print "\n";
+		print "You need CryptLib source code distribution in order to build PerlCryptLib.", "\n";
+		exit 1;
+	}
+	print "DONE", "\n";
+	print "Found(ed):", "\n";
+	foreach my $h (sort @found) {
+		chomp $h;
+		print "\t", $h;
+		my $v = qx{grep 'CRYPTLIB_VERSION' $h 2>/dev/null};
+		$v =~ m/(\d+)/;
+		print "\t", "(Ver. ", $1, ")";
+		print "\n";
+	}
+	if ( scalar(@found) > 1 ) {
+		print "$0 ABORTED!", "\n";
+		print "\n";
+		print "You have to set environment variable PERL_CRYPT_LIB_HEADER to specify which one header file to use.", "\n";
+		print "\n";
+		print "ie:", "\n";
+		print "\n";
+		print "export PERL_CRYPT_LIB_HEADER='$found[0]'", "\n";
+		print "\n";
+		exit 1;
+	}
+	$PERL_CRYPT_LIB_HEADER = $found[0];
+}
+
+print "Writing 'PerlCryptLib.ph', please wait... ";
+print qx{perl ./GenPerl.pl $PERL_CRYPT_LIB_HEADER ./PerlCryptLib.ph 1>/dev/null};
+if ( $? != 0 ) {
+	print "ERROR $?", "\n";
+	exit 1;
+}
+print "OK", "\n";
 
 WriteMakefile(
 	 'NAME'				=>	'PerlCryptLib'

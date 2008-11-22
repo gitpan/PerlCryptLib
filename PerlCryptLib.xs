@@ -2,7 +2,7 @@
 
  Perl extesione interface (XS) to 'cryptlib' library (PerlCryptLib)
 
- Copyright (C) 2006-2007 Alvaro Livraghi. All Rights Reserved.
+ Copyright (C) 2006-2008 Alvaro Livraghi. All Rights Reserved.
  Alvaro Livraghi, <perlcryptlib@gmail.com>
 
 *******************************************************************************/

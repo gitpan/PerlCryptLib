@@ -3,7 +3,7 @@
 # Copyright (C) 2007 Alvaro Livraghi
 
 #####
-#       G E N P E R L . P L   Version 0.1 (last changes 2007-06-0)
+#       G E N P E R L . P L   Version 0.2 (last changes 2008-08-17)
 #       --------------------------------------------------------------------
 #       Based upon GenVB.pl by Wolfgang Gothier
 #
@@ -139,6 +139,12 @@ while ($_ = shift @source) {
         redo if @source;
     }
     
+    # continued function declaration
+    if (s/\,s*?$/,/) {
+        $_ .= shift @source;
+        redo if @source;
+    }
+    
     # incomplete typedef / enum lines
     if (/^\s*(typedef\s+enum|typedef\s+struct|enum)\s*\{[^}]*$/) {
         $_ .= shift @source;
@@ -182,6 +188,10 @@ while ($_ = shift @source) {
 
 	# translate function declarations without params
 	if ( s/(\bC_RET\s*\w+\s*\(\s*[^)]+\s*\)\s*;)/#$1/ ) {
+		s/\n/\n#/g;
+	}
+	
+	if ( s/^(\s*?)(C_CHECK_RETVAL|C_NONNULL_ARG)(.*?)/# $1$2$3/ ) {
 		s/\n/\n#/g;
 	}
 

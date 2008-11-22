@@ -1,5 +1,5 @@
 ============================
-PerlCryptLib v.1.00 - README
+PerlCryptLib v.1.05 - README
 ============================
 
 
@@ -34,22 +34,26 @@ Pre-installation notes
 
 * Versions and platforms supported:
 
-	- cryptlib v.3.2.2 (or later) on linux
+	- cryptlib v.3.2.2 (or later) on unix/linux
 
 
 Installation
 ------------
 
+PerlCryptLib need to know the path to cryptlib.h header file for the libcl
+installed in the system.
+You can set (export) environment variable PERL_CRYPT_LIB_HEADER or,
+alternatively, Makefile.PL try itself to search for cryptlib.h in /home
+directory.
+
 Simply do:
 
 	$ tar -xvzf PerlCryptLib-x.xx.tar.gz
 	$ cd PerlCryptLib-x.xx
-	$ ./configure
 	$ perl Makefile.PL
 	$ make
 	$ make test
-	$ su ~
-	$ make install
+	$ sudo make install
 
 Note: to get test-verbosity try 'make test TEST_VERBOSE=1' instead 'make test'.
 

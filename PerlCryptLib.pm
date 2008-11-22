@@ -8,7 +8,7 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 
 
 #############################################################################
@@ -196,17 +196,16 @@ version of the 'cryptlib' library used by your system.
 This is done translating on-the-fly the cryptlib.h header file into a 
 correspondent Perl header file (named PerlCryptLib.ph) that will be used by
 the main module.
-To do that, you simply have to suggest the full-path to the cryptlib.h header 
-file when prompted by the configuration utility:
-
- ./configure
-
-After the configuration you can build, test and install as usual:
+PerlCryptLib need to know the path to cryptlib.h header file for the libcl
+installed in the system.
+You can set (export) environment variable B<PERL_CRYPT_LIB_HEADER> or,
+alternatively, Makefile.PL try itself to search for B<cryptlib.h> in B</home>
+directory.
 
  perl Makefile.PL
  make
  make test TEST_VERBOSE=1  # or, simply, the canonical  make test
- make install
+ sudo make install
 
 =head1 SYNOPSIS
 
@@ -449,7 +448,7 @@ Alvaro Livraghi, <perlcryptlib@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006-2007 Alvaro Livraghi. All Rights Reserved.
+Copyright (C) 2006-2008 Alvaro Livraghi. All Rights Reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
