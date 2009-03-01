@@ -1,14 +1,23 @@
 use 5.008;
 use ExtUtils::MakeMaker;
 use Data::Dumper;
+use File::Find;
 
+my @search_in = (
+	 '/usr/locale/include'
+	,'/usr/lib/gcc-lib'
+	,'/usr/include'
+);	
+push @search_in, $ENV{HOME} if defined($ENV{HOME});
 
 my $CRYPT_LIB_HEADER = 'cryptlib.h';
 my $PERL_CRYPT_LIB_HEADER = $ENV{PERL_CRYPT_LIB_HEADER};
 
 unless ( defined $PERL_CRYPT_LIB_HEADER ) {
-	print "Looking for '$CRYPT_LIB_HEADER', please wait... ";
-	my @found = qx{find /home -type f -iname '$CRYPT_LIB_HEADER' 2>/dev/null};
+	print "Looking for '$CRYPT_LIB_HEADER', in:\n";
+	print "\t- $_\n" foreach @search_in;
+	print "Please wait... ";
+	my @found = qx{find @search_in -type f -iname '$CRYPT_LIB_HEADER' 2>/dev/null};
 	if ( scalar(@found) == 0 ) {
 		print "NOT FOUND", "\n";
 		print "$0 ABORTED!", "\n";
@@ -18,26 +27,32 @@ unless ( defined $PERL_CRYPT_LIB_HEADER ) {
 	}
 	print "DONE", "\n";
 	print "Found(ed):", "\n";
-	foreach my $h (sort @found) {
+	my %found = ();
+	my $recent = 0;
+	foreach my $h (@found) {
 		chomp $h;
 		print "\t", $h;
 		my $v = qx{grep 'CRYPTLIB_VERSION' $h 2>/dev/null};
 		$v =~ m/(\d+)/;
+		$found{$1} = $h;
+		$recent = int($1) if int($1) gt $recent;
 		print "\t", "(Ver. ", $1, ")";
 		print "\n";
 	}
-	if ( scalar(@found) > 1 ) {
-		print "$0 ABORTED!", "\n";
-		print "\n";
-		print "You have to set environment variable PERL_CRYPT_LIB_HEADER to specify which one header file to use.", "\n";
-		print "\n";
-		print "ie:", "\n";
-		print "\n";
-		print "export PERL_CRYPT_LIB_HEADER='$found[0]'", "\n";
-		print "\n";
-		exit 1;
-	}
-	$PERL_CRYPT_LIB_HEADER = $found[0];
+#	if ( scalar(@found) > 1 ) {
+#		print "$0 ABORTED!", "\n";
+#		print "\n";
+#		print "You have to set environment variable PERL_CRYPT_LIB_HEADER to specify which one of the headers founded is to be used.", "\n";
+#		print "\n";
+#		print "ie:", "\n";
+#		print "\n";
+#		print "export PERL_CRYPT_LIB_HEADER='$found[0]'", "\n";
+#		print "\n";
+#		exit 1;
+#	}
+#	$PERL_CRYPT_LIB_HEADER = $found[0];
+	$PERL_CRYPT_LIB_HEADER = $found{$recent};
+	print "Using version '$recent' from '$found{$recent}'\n";
 }
 
 print "Writing 'PerlCryptLib.ph', please wait... ";

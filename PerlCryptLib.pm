@@ -8,7 +8,7 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 
 #############################################################################
@@ -199,8 +199,9 @@ the main module.
 PerlCryptLib need to know the path to cryptlib.h header file for the libcl
 installed in the system.
 You can set (export) environment variable B<PERL_CRYPT_LIB_HEADER> or,
-alternatively, Makefile.PL try itself to search for B<cryptlib.h> in B</home>
-directory.
+alternatively, Makefile.PL try itself to search for B<cryptlib.h> in B</usr> 
+and B</home> directories.
+If it found more than one version of B<cryptlib.h>, it will use the one with greater version number.
 
  perl Makefile.PL
  make
