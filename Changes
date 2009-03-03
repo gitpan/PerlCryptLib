@@ -1,6 +1,9 @@
 Revision history for Perl extension PerlCryptLib
 ================================================
 
+1.07  Thu Mar 03 08:39:24 2009
+	- Fixed typo in Makefile.PL at line #7
+
 1.06  Sun Mar 01 18:20:14 2009
 	- Introduced serching for cryptlib.h in system directory
 

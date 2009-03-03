@@ -8,7 +8,7 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-our $VERSION = '1.06';
+our $VERSION = '1.07';
 
 
 #############################################################################

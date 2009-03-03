@@ -4,7 +4,7 @@ use Data::Dumper;
 use File::Find;
 
 my @search_in = (
-	 '/usr/locale/include'
+	 '/usr/local/include'
 	,'/usr/lib/gcc-lib'
 	,'/usr/include'
 );	
