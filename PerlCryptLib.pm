@@ -8,7 +8,7 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-our $VERSION = '1.07';
+our $VERSION = '1.08';
 
 
 #############################################################################
@@ -83,6 +83,20 @@ our $VERSION = '1.07';
 		die "Usage: cryptFinalizeComponents(\$componentInfo, \$blob, \$size)\nFor more info see README file." if scalar(@_) != 3;
 		my ($componentInfo, $blob, $size) = @_;
 		my @rsaFields = qw(isPublicKey n nLen e eLen d dLen p pLen q qLen u uLen e1 e1Len e2 e2Len);
+	        my @dlpFields = qw(isPublicKey p pLen q qLen g gLen y yLen x xLen);
+		my @values = ();
+		map {
+			my $field = $_;
+			my $value = $componentInfo->{$field};
+			if ( $field =~ /Len$/  ||  $field eq 'isPublicKey' ) {
+			    $value = sprintf("%08x", $componentInfo->{$field});
+			    $value = pack("H8", join('', reverse($value =~ /(..)/g))); # inverte l'ordine dei byte e impacka
+			}
+			push @values, $value;
+			$$size += length($values[$#values]);
+		    } ( scalar(keys(%{$componentInfo})) == scalar(@rsaFields) ? @rsaFields : @dlpFields );
+		$$blob = join('', @values);
+		return &CRYPT_OK;
 	}
 
 

@@ -1,6 +1,9 @@
 Revision history for Perl extension PerlCryptLib
 ================================================
 
+1.08  Sat Mar 14 08:55:13 2009
+	- Fixed missing lines from cryptFinalizeComponents() in .pm
+
 1.07  Thu Mar 03 08:39:24 2009
 	- Fixed typo in Makefile.PL at line #7
 
