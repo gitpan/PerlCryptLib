@@ -1,6 +1,9 @@
 Revision history for Perl extension PerlCryptLib
 ================================================
 
+1.09  Sun Jul 26 04:47:10 2009
+	- Cryptlib header's translation has been reviewd
+
 1.08  Sat Mar 14 08:55:13 2009
 	- Fixed missing lines from cryptFinalizeComponents() in .pm
 

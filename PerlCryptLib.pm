@@ -8,7 +8,7 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-our $VERSION = '1.08';
+our $VERSION = '1.09';
 
 
 #############################################################################
@@ -205,8 +205,8 @@ its official web-site at:
 
 =head1 INSTALLATION
 
-Starting from version 1.04, PerlCryptLib has the ablility to match the correct 
-version of the 'cryptlib' library used by your system. 
+Starting from version 1.04, PerlCryptLib got the capability to match the correct 
+version of the 'cryptlib' library used by the guest system. 
 This is done translating on-the-fly the cryptlib.h header file into a 
 correspondent Perl header file (named PerlCryptLib.ph) that will be used by
 the main module.
@@ -463,7 +463,7 @@ Alvaro Livraghi, <perlcryptlib@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006-2008 Alvaro Livraghi. All Rights Reserved.
+Copyright (C) 2006-2009 Alvaro Livraghi. All Rights Reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
