@@ -1,6 +1,9 @@
 Revision history for Perl extension PerlCryptLib
 ================================================
 
+1.10  Sun Apr 18 00:25:33 2010
+	- Done some optimizations in XS code for gcc4 ISO C90 compatibility 
+
 1.09  Sun Jul 26 04:47:10 2009
 	- Cryptlib header's translation has been reviewd
 

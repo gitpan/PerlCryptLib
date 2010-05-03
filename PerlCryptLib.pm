@@ -8,7 +8,7 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-our $VERSION = '1.09';
+our $VERSION = '1.10';
 
 
 #############################################################################
@@ -463,7 +463,7 @@ Alvaro Livraghi, <perlcryptlib@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006-2009 Alvaro Livraghi. All Rights Reserved.
+Copyright (C) 2006-2010 Alvaro Livraghi. All Rights Reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
