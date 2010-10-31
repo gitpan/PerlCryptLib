@@ -2,7 +2,7 @@
 
  Perl extesione interface (XS) to 'cryptlib' library (PerlCryptLib)
 
- Copyright (C) 2006-2009 Alvaro Livraghi. All Rights Reserved.
+ Copyright (C) 2006-2010 Alvaro Livraghi. All Rights Reserved.
  Alvaro Livraghi, <perlcryptlib@gmail.com>
 
 *******************************************************************************/
@@ -335,14 +335,6 @@ int cryptAddRandom(randomData, randomDataLength)
 	const int randomDataLength;
 
 
-int cryptAsyncCancel(cryptObject)
-	const int cryptObject;
-
-
-int cryptAsyncQuery(cryptObject)
-	const int cryptObject;
-
-
 int cryptCAAddItem(keyset, certificate)
 	const int keyset;
 	const int certificate;
@@ -549,10 +541,6 @@ int cryptExportKeyEx(encryptedKey, encryptedKeyMaxLength, encryptedKeyLength, fo
 		encryptedKeyLength
 
 
-int cryptGenerateKeyAsync(cryptContext)
-	const int cryptContext;
-
-
 int cryptGetCertExtension(certificate, oid, criticalFlag, extension, extensionMaxLength, extensionLength)
 	const int certificate;
 	const char * oid;
@@ -605,3 +593,19 @@ int cryptQueryObject(objectData, objectDataLength, cryptObjectInfo)
 		}
 	OUTPUT:
 		RETVAL
+
+# Add deprecated functions when CRYPTLIB_VERSION prior 3.4.0
+#if CRYPTLIB_VERSION < 3400
+
+int cryptAsyncCancel(cryptObject)
+	const int cryptObject;
+
+
+int cryptAsyncQuery(cryptObject)
+	const int cryptObject;
+
+
+int cryptGenerateKeyAsync(cryptContext)
+	const int cryptContext;
+
+#endif
